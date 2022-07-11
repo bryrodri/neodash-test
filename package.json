@@ -22,7 +22,7 @@
     }
   ],
   "scripts": {
-    "dev": "npx webpack-dev-server --mode development",
+    "dev": "npx webpack-dev-server --mode development --env=development",
     "debug": "npx --node-options='--inspect' webpack-dev-server --mode development",
     "build": "npx webpack --mode production && cp -r public/* dist/",
     "sync": "aws s3 sync --acl public-read build s3://neodash.graphapp.io/preview",
@@ -52,6 +52,7 @@
     "cypher-codemirror": "github:nielsdejong/cypher-editor#c0eff97fc97f22355e60b57fb6f8dc26b16f9a5f",
     "d3-scale-chromatic": "^3.0.0",
     "dom-to-image": "^2.6.0",
+    "dotenv": "^16.0.1",
     "leaflet": "^1.7.1",
     "lodash": "^4.17.21",
     "material-ui-color-picker": "github:nielsdejong/material-ui-color-picker#c1bae552c1daf81952bf0478d7f71c1a416527d3",
@@ -65,6 +66,7 @@
     "react-leaflet-enhanced-marker": "github:nielsdejong/react-leaflet-enhanced-marker#603a7d73dc9b13a31ab1e8abfd932d63263b4af0",
     "react-markdown": "^8.0.0",
     "react-redux": "^7.2.6",
+    "react-scripts": "^5.0.1",
     "redux-devtools-extension": "^2.13.9",
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.4.1",
@@ -85,6 +87,7 @@
     "babel-loader": "^8.2.3",
     "css-loader": "^3.6.0",
     "cypress": "^9.5.3",
+    "dotenv-webpack": "^8.0.0",
     "file-loader": "^6.2.0",
     "react-hot-loader": "^4.13.0",
     "serverless-finch": "^4.0.0",

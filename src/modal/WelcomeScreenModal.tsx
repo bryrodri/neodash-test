@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -29,10 +29,15 @@ export const NeoWelcomeScreenModal = ({ welcomeScreenOpen, setWelcomeScreenOpen,
         setPromptOpen(false);
     };
 
+    useEffect(() => {
+        onConnectionModalOpen();
+      }, []);
+
+    // open={welcomeScreenOpen == true}
 
     return (
         <div>
-            <Dialog maxWidth="xs" open={welcomeScreenOpen == true} aria-labelledby="form-dialog-title">
+            <Dialog maxWidth="xs" open={false} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">NeoDash - Neo4j Dashboard Builder
                     <IconButton disabled style={{ color: "white", padding: "5px", float: "right" }}>
                         ⚡

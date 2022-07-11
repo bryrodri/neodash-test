@@ -129,7 +129,7 @@ const mapDispatchToProps = dispatch => ({
         dispatch(updateDashboardSetting(setting, value));
     },
     resetApplication: _ => {
-        dispatch(setWelcomeScreenOpen(true));
+        // dispatch(setWelcomeScreenOpen(true));
         dispatch(setConnected(false));
     }
 });

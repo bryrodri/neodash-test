@@ -32,6 +32,7 @@ export const createConnectionThunk = (protocol, url, port, database, username, p
         const driver = createDriver(protocol, url, port, username, password)
         console.log("Attempting to connect...")
         const validateConnection = (records) => {
+            console.log("datos ",protocol, url, port, database, username, password)
             console.log("Confirming connection was established...")
             if (records && records[0] && records[0]["error"]) {
                 dispatch(createNotificationThunk("Unable to establish connection", records[0]["error"]));
@@ -217,17 +218,20 @@ export const loadApplicationConfigThunk = () => async (dispatch: any, getState: 
         ssoEnabled: false,
         ssoDiscoveryUrl: "http://example.com",
         standalone: false,
-        standaloneProtocol: "neo4j",
+        standaloneProtocol: process.env.REACT_APP_PROTOCOL,
         standaloneHost: "localhost",
-        standalonePort: "7687",
-        standaloneDatabase: "neo4j",
+        standalonePort: process.env.REACT_APP_PORT,
+        standaloneDatabase: process.env.REACT_APP_DATABASE,
         standaloneDashboardName: "My Dashboard",
         standaloneDashboardDatabase: "dashboards",
-        standaloneDashboardURL: ""
+        standaloneDashboardURL: process.env.REACT_APP_URL
     };
+    console.log("loadApplicationConfigThunk")
     try {
+        
         config = await (await fetch("config.json")).json();
     } catch (e) {
+        console.log("aquiii1")
         // Config may not be found, for example when we are in Neo4j Desktop.
         console.log("No config file detected. Setting to safe defaults.");
     }
@@ -248,7 +252,7 @@ export const loadApplicationConfigThunk = () => async (dispatch: any, getState: 
         const state = getState();
         const standalone = config['standalone'];// || (state.application.shareDetails !== undefined && state.application.shareDetails.standalone);
         dispatch(setStandaloneEnabled(standalone, config['standaloneProtocol'], config['standaloneHost'], config['standalonePort'], config['standaloneDatabase'], config['standaloneDashboardName'], config['standaloneDashboardDatabase'], config["standaloneDashboardURL"]))
-        dispatch(setConnectionModalOpen(false));
+        // dispatch(setConnectionModalOpen(false));
 
         // Auto-upgrade the dashboard version if an old version is cached.
         if(state.dashboard && state.dashboard.version !== NEODASH_VERSION){
@@ -320,10 +324,10 @@ export const loadApplicationConfigThunk = () => async (dispatch: any, getState: 
                     config['standaloneUsername'],
                     config['standalonePassword']));
             } else {
-                dispatch(setConnectionModalOpen(true));
+                // dispatch(setConnectionModalOpen(true));
             }
         } else {
-            dispatch(clearDesktopConnectionProperties());
+            // dispatch(clearDesktopConnectionProperties());
             dispatch(setDatabaseFromNeo4jDesktopIntegrationThunk());
             const old = localStorage.getItem('neodash-dashboard');
             dispatch(setOldDashboard(old));
@@ -334,13 +338,13 @@ export const loadApplicationConfigThunk = () => async (dispatch: any, getState: 
                 dispatch(setParametersToLoadAfterConnecting(null));
             }
 
-            dispatch(setWelcomeScreenOpen(true));
+            // dispatch(setWelcomeScreenOpen(true));
             
             if (clearNotificationAfterLoad) {
                 dispatch(clearNotification());
             }
             dispatch(handleSharedDashboardsThunk());
-            dispatch(setConnectionModalOpen(false));
+            // dispatch(setConnectionModalOpen(false));
             dispatch(setReportHelpModalOpen(false));
             dispatch(setAboutModalOpen(false));
         }
