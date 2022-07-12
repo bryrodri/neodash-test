@@ -52,7 +52,7 @@ export const NeoDashboardHeaderPageList = ({ open, standalone, editable, pages, 
                 padding: 0, margin: 0,
                 height: "100%",
             }}>
-            <NeoPageAddButton onClick={addPage}></NeoPageAddButton>
+            {/* <NeoPageAddButton onClick={addPage}></NeoPageAddButton> */}
         </div>);
     }
 

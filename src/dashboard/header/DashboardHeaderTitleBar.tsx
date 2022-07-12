@@ -27,7 +27,7 @@ export const NeoDashboardHeaderTitleBar = ({ dashboardTitle, downloadImageEnable
         console.log(user)
         
     }, [])
-    const content = <Toolbar key={1} style={{ paddingRight: 24, minHeight: "64px", background: '#0B297D', zIndex: 1201 }}>
+    const content = <Toolbar key={1} style={{ paddingRight: 24, minHeight: "64px", background: '#fb500b', zIndex: 1201 }}>
         {!standalone ? <IconButton
             edge="start"
             color="inherit"
@@ -50,6 +50,7 @@ export const NeoDashboardHeaderTitleBar = ({ dashboardTitle, downloadImageEnable
             placeholder="Dashboard Name..."
             fullWidth
             maxRows={4}
+            readOnly={true}
             value={dashboardTitleText}
             onChange={(event) => {
                 if (editable) {

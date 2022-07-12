@@ -104,10 +104,10 @@ export const NeoPage = (
             }]
         });
         setLastElement(<Grid style={{ paddingBottom: "6px" }} key={getReportIndex(pagenumber, 999999)}>
-            <NeoAddCard onCreatePressed={() => {
+            {/* <NeoAddCard onCreatePressed={() => {
                 const { x, y } = getAddCardButtonPosition();
                 onCreatePressed(x, y, 3, 2);
-            }} />
+            }} /> */}
         </Grid>);
     }
 

@@ -43,11 +43,14 @@ const NeoCardViewHeader = ({ title, editable, onTitleUpdate, fullscreenEnabled, 
                             id="standard-outlined"
                             className={"no-underline large"}
                             label=""
-                            disabled={!editable}
+                            disabled={false}
                             placeholder="Report name..."
                             fullWidth
                             maxRows={4}
                             value={text}
+                            inputProps={
+                                { readOnly: true, }
+                            }
                             onChange={(event) => {
                                 setText(event.target.value);
                                 debouncedTitleUpdate(event.target.value);
@@ -60,10 +63,11 @@ const NeoCardViewHeader = ({ title, editable, onTitleUpdate, fullscreenEnabled, 
     </>
 
     const settingsButton = <Tooltip title="Settings" aria-label="settings">
-        <IconButton aria-label="settings"
+        {/* <IconButton aria-label="settings"
             onClick={onToggleCardSettings}>
             <MoreVertIcon />
-        </IconButton>
+        </IconButton> */}
+        <></>
     </Tooltip>
 
     const maximizeButton = <Tooltip title="Maximize" aria-label="maximize">

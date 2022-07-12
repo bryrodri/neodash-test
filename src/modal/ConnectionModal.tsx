@@ -22,15 +22,9 @@ export default function NeoConnectionModal({ open, standalone, standaloneSetting
 
     const protocols = ["neo4j", "neo4j+s", "neo4j+ssc", "bolt", "bolt+s", "bolt+ssc"]
     const [ssoVisible, setSsoVisible] = React.useState(ssoSettings['ssoEnabled']);
-    const [protocol, setProtocol] = React.useState(connection.protocol);
-    const [url, setUrl] = React.useState(connection.url);
-    const [port, setPort] = React.useState(connection.port);
-    const [username, setUsername] = React.useState(connection.username);
-    const [password, setPassword] = React.useState(connection.password);
-    const [database, setDatabase] = React.useState(connection.database);
     // Make sure local vars are updated on external connection updates.
     useEffect(() => {
-        console.log("conection", JSON.stringify(connection))
+        console.log("conection", process.env.REACT_APP_PROTOCOL, process.env.REACT_APP_URL, process.env.REACT_APP_PORT, process.env.REACT_APP_DATABASE, process.env.REACT_APP_USERNAME, process.env.REACT_APP_PASSWORD)
         createConnection(process.env.REACT_APP_PROTOCOL, process.env.REACT_APP_URL, process.env.REACT_APP_PORT, process.env.REACT_APP_DATABASE, process.env.REACT_APP_USERNAME, process.env.REACT_APP_PASSWORD);
     }, [])
 

@@ -42,7 +42,7 @@ export const NeoPageButton = ({ title, disabled = false, selected = false, onSel
                                 e.stopPropagation();
                             }
                         }}
-                        readOnly={disabled}
+                        readOnly={true}
                         inputProps={{ style: { textTransform: 'none', cursor: 'pointer', fontWeight: 'normal' } }}
                         style={{ height: "36px", width: "100%", paddingLeft: "10px", color: selected ? 'black' : '#888', textAlign: "center", textTransform: "uppercase" }}
                         placeholder="Page name..."
@@ -51,10 +51,10 @@ export const NeoPageButton = ({ title, disabled = false, selected = false, onSel
             </Grid>
             <div style={{position: "absolute", top: 5, right: 0, paddingRight: 3, background: selected ? "white" : "transparent"}}>
                 {(selected && !disabled) ? <IconButton size="medium" style={{ padding: "5px", color: "white" }} aria-label="move left" onClick={() => setModalOpen(true)}>
-                    <CloseIcon color="disabled" />
+                   
                 </IconButton> : <IconButton size="medium" style={{ opacity: 0, padding: "5px", color: "white" }} aria-label="move left"
                     onClick={(event) => null}>
-                    <CloseIcon color="disabled" />
+                   
                 </IconButton>}
             </div>
             {/* <NeoDeletePageModal modalOpen={modalOpen} onRemove={onRemove} handleClose={handleClose}></NeoDeletePageModal> */}
