@@ -28,6 +28,9 @@ const NeoField = ({ label,
             variant={variant}
             label={label}
             helperText={helperText}
+            inputProps={
+                { readOnly: true, }
+            }
             disabled={disabled}
             value={value != null ? value : defaultValue}
             // defaultValue={defaultValue}

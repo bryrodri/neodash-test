@@ -79,7 +79,7 @@ export const NeoDrawer = ({ open, hidden, connection, dashboardSettings, updateD
                     <ChevronLeftIcon />
                 </IconButton>
             </div>
-            <Divider />
+            {/* <Divider />
             <div >
                 <ListItem style={{ background: "white", height: "47px" }} >
                     <ListItemIcon>
@@ -87,13 +87,13 @@ export const NeoDrawer = ({ open, hidden, connection, dashboardSettings, updateD
                     <ListItemText primary="" />
                 </ListItem>
             </div>
-            <Divider />
+            <Divider /> */}
             <List>
                 <div>
                     <NeoSettingsModal dashboardSettings={dashboardSettings} updateDashboardSetting={updateDashboardSetting}></NeoSettingsModal>
                     {/* <NeoSaveModal></NeoSaveModal>
                     <NeoLoadModal></NeoLoadModal> */}
-                    <NeoShareModal></NeoShareModal>
+                    {/* <NeoShareModal></NeoShareModal> */}
                 </div>
             </List>
             <Divider />

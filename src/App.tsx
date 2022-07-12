@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route , Routes} from 'react-router-dom';
 import Application from './application/Application';
 import { useAuth0 } from "@auth0/auth0-react";
 import Test from "./Test";
+import './App.css'
 
 
 //components
