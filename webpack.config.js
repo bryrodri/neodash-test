@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 require('dotenv').config({ path: './.env' }); 
 
 module.exports = (env)=>  
@@ -36,11 +37,15 @@ return {
         filename: 'bundle.js'
     },
     devServer: {
+        contentBase: "./build",
         port: 3000,
         hot: true,
         historyApiFallback: true
     },
     plugins: [
+        new HtmlWebpackPlugin({
+            template: path.resolve('./index.html'),
+          }),
         new webpack.DefinePlugin({
             "process.env.REACT_APP_PROTOCOL": JSON.stringify(process.env.REACT_APP_PROTOCOL),
             "process.env.REACT_APP_URL": JSON.stringify(process.env.REACT_APP_URL),

@@ -91,6 +91,7 @@
     "cypress": "^9.5.3",
     "dotenv-webpack": "^8.0.0",
     "file-loader": "^6.2.0",
+    "html-webpack-plugin": "^5.5.0",
     "react-hot-loader": "^4.13.0",
     "serverless-finch": "^4.0.0",
     "source-map-loader": "^1.1.3",
