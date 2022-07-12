@@ -24,7 +24,6 @@ export default function NeoConnectionModal({ open, standalone, standaloneSetting
     const [ssoVisible, setSsoVisible] = React.useState(ssoSettings['ssoEnabled']);
     // Make sure local vars are updated on external connection updates.
     useEffect(() => {
-        console.log("conection", process.env.REACT_APP_PROTOCOL, process.env.REACT_APP_URL, process.env.REACT_APP_PORT, process.env.REACT_APP_DATABASE, process.env.REACT_APP_USERNAME, process.env.REACT_APP_PASSWORD)
         createConnection(process.env.REACT_APP_PROTOCOL, process.env.REACT_APP_URL, process.env.REACT_APP_PORT, process.env.REACT_APP_DATABASE, process.env.REACT_APP_USERNAME, process.env.REACT_APP_PASSWORD);
     }, [])
 

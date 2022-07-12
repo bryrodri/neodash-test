@@ -32,7 +32,6 @@ export const createConnectionThunk = (protocol, url, port, database, username, p
         const driver = createDriver(protocol, url, port, username, password)
         console.log("Attempting to connect...")
         const validateConnection = (records) => {
-            console.log("datos ",protocol, url, port, database, username, password)
             console.log("Confirming connection was established...")
             if (records && records[0] && records[0]["error"]) {
                 dispatch(createNotificationThunk("Unable to establish connection", records[0]["error"]));
