@@ -129,7 +129,7 @@ const mapDispatchToProps = dispatch => ({
         }
     },
     onResetShareDetails: _ => {
-        dispatch(setWelcomeScreenOpen(true));
+        // dispatch(setWelcomeScreenOpen(true));
         dispatch(resetShareDetails());
     },
     onSSOAttempt: _ => {

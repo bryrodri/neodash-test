@@ -13,23 +13,25 @@ import {
     SET_STANDALONE_MODE, SET_WAIT_FOR_SSO, SET_WELCOME_SCREEN_OPEN
 } from "./ApplicationActions";
 
+
 const update = (state, mutations) =>
     Object.assign({}, state, mutations)
-
+console.log("aqui",process.env.REACT_APP_PROTOCOL )
+console.log("aqui",process.env.PROTOCOL )
 const initialState =
 {
     notificationTitle: null,
     notificationMessage: null,
-    connectionModalOpen: false,
-    welcomeScreenOpen: true,
+    connectionModalOpen: true,
+    welcomeScreenOpen: false,
     aboutModalOpen: false,
     connection: {
-        protocol: "neo4j",
-        url: "localhost",
-        port: "7687",
-        database: "",
-        username: "neo4j",
-        password: ""
+        protocol: process.env.REACT_APP_PROTOCOL,
+        url: process.env.REACT_APP_URL,
+        port: process.env.REACT_APP_PORT,
+        database: process.env.REACT_APP_DATABASE,
+        username: process.env.REACT_APP_USERNAME,
+        password: process.env.REACT_APP_PASSWORD
     },
     shareDetails: undefined,
     desktopConnection: null,

@@ -1,7 +1,14 @@
 const path = require('path');
 const webpack = require('webpack');
+const Dotenv = require('dotenv-webpack');
 
-module.exports = {
+require('dotenv').config({ path: './.env' }); 
+
+module.exports = (env)=>  
+{
+    console.log('env',env)
+    console.log(process.env.REACT_APP_PROTOCOL)
+return {
     entry: './src/index.tsx',
     mode: 'development',
     devtool: 'source-map',
@@ -37,5 +44,16 @@ module.exports = {
         hot: true,
         historyApiFallback: true
     },
-    plugins: [new webpack.HotModuleReplacementPlugin()]
-};
+    plugins: [
+        new webpack.DefinePlugin({
+            "process.env.REACT_APP_PROTOCOL": JSON.stringify(process.env.REACT_APP_PROTOCOL),
+            "process.env.REACT_APP_URL": JSON.stringify(process.env.REACT_APP_URL),
+            "process.env.REACT_APP_PORT": JSON.stringify(process.env.REACT_APP_PORT),
+            "process.env.REACT_APP_DATABASE": JSON.stringify(process.env.REACT_APP_DATABASE),
+            "process.env.REACT_APP_USERNAME": JSON.stringify(process.env.REACT_APP_USERNAME),
+            "process.env.REACT_APP_PASSWORD": JSON.stringify(process.env.REACT_APP_PASSWORD),
+            "process.env": JSON.stringify(process.env)
+          }),
+        
+        new webpack.HotModuleReplacementPlugin()]
+}}
