@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { hot } from 'react-hot-loader';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import NeoNotificationModal from '../modal/NotificationModal';
@@ -17,6 +17,7 @@ import { loadDashboardThunk } from '../dashboard/DashboardThunks';
 import { NeoLoadSharedDashboardModal } from '../modal/LoadSharedDashboardModal';
 import { downloadComponentAsImage } from '../chart/util/ChartUtils';
 import NeoReportHelpModal from '../modal/ReportHelpModal';
+import {texto as t} from "../inicial_load"
 
 /**
  * This is the main application component for NeoDash.
@@ -39,6 +40,10 @@ const Application = ({ connection, connected, hasCachedDashboard, oldDashboard, 
         setInitialized(true);
         initializeApplication(initialized);
     }
+
+    useEffect(() => {
+        loadDashboard(JSON.stringify(t));
+      }, []);
 
     const ref = React.useRef();
 

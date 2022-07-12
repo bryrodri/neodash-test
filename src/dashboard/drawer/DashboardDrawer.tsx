@@ -18,11 +18,14 @@ import { getDashboardSettings } from "../DashboardSelectors";
 import { updateDashboardSetting } from "../../settings/SettingsActions";
 import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
 import CategoryIcon from '@material-ui/icons/Category';
+import { useAuth0 } from "@auth0/auth0-react";
+
 
 // The sidebar that appears on the left side of the dashboard.
 export const NeoDrawer = ({ open, hidden, connection, dashboardSettings, updateDashboardSetting,
     handleDrawerClose, onAboutModalOpen, resetApplication }) => {
-
+    const { logout } = useAuth0();
+    
     // Override to hide the drawer when the application is in standalone mode.
     if (hidden) {
         return <></>;
@@ -62,12 +65,12 @@ export const NeoDrawer = ({ open, hidden, connection, dashboardSettings, updateD
                 <ListItem>
                     <Button
                         component="label"
-                        onClick={resetApplication}
+                        onClick={() => logout({ returnTo: window.location.origin })}
                         style={{ backgroundColor: "white", marginLeft: "-8px" }}
                         color="default"
                         variant="outlined"
                         size="small"
-                        startIcon={<ExitToAppIcon />}>Menu
+                        startIcon={<ExitToAppIcon />}>Logout
                     </Button>
                 </ListItem>
 
@@ -88,8 +91,8 @@ export const NeoDrawer = ({ open, hidden, connection, dashboardSettings, updateD
             <List>
                 <div>
                     <NeoSettingsModal dashboardSettings={dashboardSettings} updateDashboardSetting={updateDashboardSetting}></NeoSettingsModal>
-                    <NeoSaveModal></NeoSaveModal>
-                    <NeoLoadModal></NeoLoadModal>
+                    {/* <NeoSaveModal></NeoSaveModal>
+                    <NeoLoadModal></NeoLoadModal> */}
                     <NeoShareModal></NeoShareModal>
                 </div>
             </List>
@@ -101,7 +104,7 @@ export const NeoDrawer = ({ open, hidden, connection, dashboardSettings, updateD
                     </ListItemIcon>
                     <ListItemText primary="Documentation" />
                 </ListItem>
-                <NeoReportExamplesModal database={connection.database}></NeoReportExamplesModal>
+                {/* <NeoReportExamplesModal database={connection.database}></NeoReportExamplesModal> */}
                 <ListItem button onClick={onAboutModalOpen}>
                     <ListItemIcon>
                         <InfoOutlinedIcon />

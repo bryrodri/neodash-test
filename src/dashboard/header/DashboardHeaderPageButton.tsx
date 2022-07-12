@@ -57,7 +57,7 @@ export const NeoPageButton = ({ title, disabled = false, selected = false, onSel
                     <CloseIcon color="disabled" />
                 </IconButton>}
             </div>
-            <NeoDeletePageModal modalOpen={modalOpen} onRemove={onRemove} handleClose={handleClose}></NeoDeletePageModal>
+            {/* <NeoDeletePageModal modalOpen={modalOpen} onRemove={onRemove} handleClose={handleClose}></NeoDeletePageModal> */}
         </>
     );
     return content;

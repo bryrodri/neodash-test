@@ -4,8 +4,10 @@ import MenuIcon from '@material-ui/icons/Menu';
 import { connect } from "react-redux";
 import debounce from 'lodash/debounce';
 import ImageIcon from '@material-ui/icons/Image';
+import { useAuth0 } from '@auth0/auth0-react';
 
 export const NeoDashboardHeaderTitleBar = ({ dashboardTitle, downloadImageEnabled, onDownloadImage, open, setDashboardTitle, connection, editable, standalone, handleDrawerOpen, onConnectionModalOpen }) => {
+    const { user } = useAuth0();
 
     const [dashboardTitleText, setDashboardTitleText] = React.useState(dashboardTitle);
     const debouncedDashboardTitleUpdate = useCallback(
@@ -18,9 +20,13 @@ export const NeoDashboardHeaderTitleBar = ({ dashboardTitle, downloadImageEnable
         if (dashboardTitle !== dashboardTitleText) {
             setDashboardTitleText(dashboardTitle);
         }
+
     }, [dashboardTitle])
 
-
+    useEffect(() => {
+        console.log(user)
+        
+    }, [])
     const content = <Toolbar key={1} style={{ paddingRight: 24, minHeight: "64px", background: '#0B297D', zIndex: 1201 }}>
         {!standalone ? <IconButton
             edge="start"
@@ -59,14 +65,12 @@ export const NeoDashboardHeaderTitleBar = ({ dashboardTitle, downloadImageEnable
     </IconButton>
 </Tooltip> : <></>}
 
-        <Tooltip title={connection.protocol + "://" + connection.url + ":" + connection.port} placement="left" aria-label="host">
+        <Tooltip title={user?.nickname || ''} placement="left" aria-label="host">
             <IconButton style={{ background: "#ffffff22", padding: "3px" }} onClick={(e) => {
-                if (!standalone) {
-                    onConnectionModalOpen();
-                }
+
             }}>
                 <Badge badgeContent={""} >
-                    <img style={{ width: "36px", height: "36px" }} src="neo4j-icon.png" />
+                    <img style={{ width: "36px", height: "36px", borderRadius:'50%' }} src={ user?.picture || "neo4j-icon.png"} />
                 </Badge>
             </IconButton>
         </Tooltip>

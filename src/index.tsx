@@ -21,8 +21,8 @@ const persister = persistStore(store);
 const provider = <ReduxProvider store={store}>
     <PersistGate persistor={persister} loading={<div>Loading NeoDash...</div>}>
     <Auth0Provider
-    domain="dev-5ftozwok.us.auth0.com"
-    clientId="85DNNVlBLOrHQHTztjJwUJZnRSyMQEiZ"
+    domain={process.env.REACT_APP_DOMAIN || ''}
+    clientId={process.env.REACT_APP_CLIENT_ID || ''}
     redirectUri={window.location.origin}
     >
         <App/>

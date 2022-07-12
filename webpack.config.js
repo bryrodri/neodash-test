@@ -52,6 +52,8 @@ return {
             "process.env.REACT_APP_DATABASE": JSON.stringify(process.env.REACT_APP_DATABASE),
             "process.env.REACT_APP_USERNAME": JSON.stringify(process.env.REACT_APP_USERNAME),
             "process.env.REACT_APP_PASSWORD": JSON.stringify(process.env.REACT_APP_PASSWORD),
+            "process.env.REACT_APP_DOMAIN": JSON.stringify(process.env.REACT_APP_DOMAIN),
+            "process.env.REACT_APP_CLIENT_ID": JSON.stringify(process.env.REACT_APP_CLIENT_ID),
             "process.env": JSON.stringify(process.env)
           }),
         

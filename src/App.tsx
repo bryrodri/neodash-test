@@ -31,7 +31,7 @@ function App() {
     <>  
       <Router>
         <Routes>
-          <Route path="/" element={<Application/>}></Route>
+          <Route path="/" element={ isAuthenticated ? <Application/> :<></>}></Route>
           <Route path="/nepage" element={<Test/>}></Route>
           <Route path="*" element={<div >Error</div>} />
         </Routes>

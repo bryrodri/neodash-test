@@ -37,7 +37,7 @@ export const NeoLoadModal = ({ loadDashboard, loadDatabaseListFromNeo4j, loadDas
     const [databases, setDatabases] = React.useState(["neo4j"]);
 
     useEffect(() => {
-        loadDashboard(JSON.stringify(t));
+        // loadDashboard(JSON.stringify(t));
     }, [] )
 
     const handleClickOpen = () => {
