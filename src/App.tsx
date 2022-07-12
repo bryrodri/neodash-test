@@ -16,13 +16,15 @@ function App() {
   const { loginWithRedirect, isAuthenticated, isLoading} = useAuth0();
   console.log(isLoading)
   useEffect(() => {
+    console.log('auth', isAuthenticated)
+    console.log('loading', isLoading)
     if(!isLoading){
       if(!isAuthenticated){
         console.log(isAuthenticated)
         loginWithRedirect()
       }
     }
-  }, []);
+  }, [isLoading]);
 
   return (
 
