@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -17,7 +17,7 @@ import StorageIcon from '@material-ui/icons/Storage';
 import { loadDashboardFromNeo4jByUUIDThunk, loadDashboardListFromNeo4jThunk, loadDashboardThunk, loadDatabaseListFromNeo4jThunk } from '../dashboard/DashboardThunks';
 import { DataGrid } from '@mui/x-data-grid';
 import { Neo4jContext, Neo4jContextState } from "use-neo4j/dist/neo4j.context";
-
+import {texto as t} from "../inicial_load"
 /**
  * A modal to save a dashboard as a JSON text string.
  * The button to open the modal is intended to use in a drawer at the side of the page.
@@ -35,6 +35,10 @@ export const NeoLoadModal = ({ loadDashboard, loadDatabaseListFromNeo4j, loadDas
     const { driver } = useContext<Neo4jContextState>(Neo4jContext);
     const [dashboardDatabase, setDashboardDatabase] = React.useState("neo4j");
     const [databases, setDatabases] = React.useState(["neo4j"]);
+
+    useEffect(() => {
+        loadDashboard(JSON.stringify(t));
+    }, [] )
 
     const handleClickOpen = () => {
         setLoadModalOpen(true);
