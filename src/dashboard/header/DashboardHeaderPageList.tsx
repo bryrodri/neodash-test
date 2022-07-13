@@ -104,6 +104,7 @@ export const NeoDashboardHeaderPageList = ({ open, standalone, editable, pages, 
                 {pages.map((page, i) =>
                     <div key={i}
                         style={{
+                            cursor:'pointer',
                             background: "grey",
                             backgroundColor: (pagenumber == i) ? 'white' : 'inherit',
                             display: "inline-block",
