@@ -57,12 +57,12 @@ export const NeoDrawer = ({ open, hidden, connection, dashboardSettings, updateD
                 display: 'flex',
                 alignItems: 'center',
                 overflowX: 'hidden',
-                justifyContent: 'flex-end',
+                justifyContent: 'flex-start',
                 padding: '0 8px',
                 minHeight: '64px',
 
             }}>
-                <ListItem>
+                {/* <ListItem>
                     <Button
                         component="label"
                         onClick={() => logout({ returnTo: window.location.origin })}
@@ -72,7 +72,7 @@ export const NeoDrawer = ({ open, hidden, connection, dashboardSettings, updateD
                         size="small"
                         startIcon={<ExitToAppIcon />}>Logout
                     </Button>
-                </ListItem>
+                </ListItem> */}
 
 
                 <IconButton onClick={handleDrawerClose}>
@@ -90,7 +90,7 @@ export const NeoDrawer = ({ open, hidden, connection, dashboardSettings, updateD
             <Divider /> */}
             <List>
                 <div>
-                    <NeoSettingsModal dashboardSettings={dashboardSettings} updateDashboardSetting={updateDashboardSetting}></NeoSettingsModal>
+                    {/* <NeoSettingsModal dashboardSettings={dashboardSettings} updateDashboardSetting={updateDashboardSetting}></NeoSettingsModal> */}
                     {/* <NeoSaveModal></NeoSaveModal>
                     <NeoLoadModal></NeoLoadModal> */}
                     {/* <NeoShareModal></NeoShareModal> */}
@@ -100,17 +100,17 @@ export const NeoDrawer = ({ open, hidden, connection, dashboardSettings, updateD
             <List>
                 <ListItem button onClick={(e) => window.open("https://github.com/neo4j-labs/neodash/wiki/User-Guide", "_blank")}>
                     <ListItemIcon>
-                        <LibraryBooksIcon />
+                        <ExitToAppIcon />
                     </ListItemIcon>
-                    <ListItemText primary="Documentation" />
+                    <ListItemText primary="Logout" />
                 </ListItem>
                 {/* <NeoReportExamplesModal database={connection.database}></NeoReportExamplesModal> */}
-                <ListItem button onClick={onAboutModalOpen}>
+                {/* <ListItem button onClick={onAboutModalOpen}>
                     <ListItemIcon>
                         <InfoOutlinedIcon />
                     </ListItemIcon>
                     <ListItemText primary="About" />
-                </ListItem>
+                </ListItem> */}
             </List>
             <Divider />
         </Drawer>
