@@ -938,7 +938,7 @@ export const REPORT_TYPES = {
         disableRefreshRate: true,
         disableCypherParameters: true,
         textOnly: true,
-        maxRecords: 5,
+        maxRecords: 30,
         settings: {
             "clearParameterOnFieldClear": {
                 label: "Clear Parameter on Field Reset",

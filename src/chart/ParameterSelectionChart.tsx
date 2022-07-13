@@ -52,7 +52,7 @@ const NeoParameterSelectionChart = (props: ChartProps) => {
     const settings = (props.settings) ? props.settings : {};
     const helperText = settings.helperText;
     const clearParameterOnFieldClear = settings.clearParameterOnFieldClear;
-
+    
     return <div>
         {type == "Free Text" ?
             <>

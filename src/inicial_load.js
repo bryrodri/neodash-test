@@ -20,7 +20,7 @@ export const texto =
       "reports": [
         {
           "title": "Categoría",
-          "query": "MATCH (n:`categoria`) \nWHERE toLower(toString(n.`nombre`)) CONTAINS toLower($input) \nRETURN DISTINCT n.`nombre` as value LIMIT 5",
+          "query": "MATCH (n:`categoria`) \nWHERE toLower(toString(n.`nombre`)) CONTAINS toLower($input) \nRETURN DISTINCT n.`nombre` as value LIMIT 30",
           "width": 3,
           "height": 2,
           "x": 0,
@@ -179,7 +179,7 @@ export const texto =
         },
         {
           "title": "Categoria",
-          "query": "MATCH (n:`categoria`) \nWHERE toLower(toString(n.`nombre`)) CONTAINS toLower($input) \nRETURN DISTINCT n.`nombre` as value LIMIT 5",
+          "query": "MATCH (n:`categoria`) \nWHERE toLower(toString(n.`nombre`)) CONTAINS toLower($input) \nRETURN DISTINCT n.`nombre` as value LIMIT 30",
           "width": 3,
           "height": 1,
           "x": 0,
@@ -195,7 +195,7 @@ export const texto =
         },
         {
           "title": "Punto de venta",
-          "query": "MATCH (n:`punto_venta`) \nWHERE toLower(toString(n.`nombre`)) CONTAINS toLower($input) \nRETURN DISTINCT n.`nombre` as value LIMIT 5",
+          "query": "MATCH (n:`punto_venta`) \nWHERE toLower(toString(n.`nombre`)) CONTAINS toLower($input) \nRETURN DISTINCT n.`nombre` as value LIMIT 30",
           "width": 3,
           "height": 1,
           "x": 0,
@@ -253,7 +253,7 @@ export const texto =
         },
         {
           "title": "Municipio",
-          "query": "MATCH (n:`municipio`) \nWHERE toLower(toString(n.`nombre`)) CONTAINS toLower($input) \nRETURN DISTINCT n.`nombre` as value LIMIT 5",
+          "query": "MATCH (n:`municipio`) \nWHERE toLower(toString(n.`nombre`)) CONTAINS toLower($input) \nRETURN DISTINCT n.`nombre` as value LIMIT 30",
           "width": 3,
           "height": 2,
           "x": 0,
