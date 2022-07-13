@@ -16,7 +16,7 @@ export const texto =
   },
   "pages": [
     {
-      "title": "Top 10 productos más vendidos por categorias",
+      "title": "Productos más vendidos",
       "reports": [
         {
           "title": "Categoría",
@@ -156,7 +156,7 @@ export const texto =
       ]
     },
     {
-      "title": "Productos más vendidos por un punto de venta",
+      "title": "Productos por punto de venta",
       "reports": [
         {
           "title": "Gráfico de barras",
@@ -231,7 +231,7 @@ export const texto =
       ]
     },
     {
-      "title": "Ventas por Punto de venta y municipio",
+      "title": "Ventas por municipio",
       "reports": [
         {
           "title": "Gráfico de torta",
