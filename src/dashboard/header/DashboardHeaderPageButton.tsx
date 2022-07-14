@@ -25,6 +25,7 @@ export const NeoPageButton = ({ title, disabled = false, selected = false, onSel
         <>
             <Grid style={{ height: "100%" }}
                 onClick={onSelect}
+                onTouchStart={onSelect}
                 container spacing={1} alignItems="flex-end">
                 <Grid item key={1} style={{ width: "100%" }}>
                     <InputBase
@@ -42,7 +43,7 @@ export const NeoPageButton = ({ title, disabled = false, selected = false, onSel
                                 e.stopPropagation();
                             }
                         }}
-                        readOnly={true}
+                        readOnly={true} 
                         inputProps={{ style: { textTransform: 'none', cursor: 'pointer', fontWeight: 'normal' } }}
                         style={{ height: "36px", width: "100%", paddingLeft: "10px", color: selected ? 'black' : '#888', textAlign: "center", textTransform: "uppercase" }}
                         placeholder="Page name..."

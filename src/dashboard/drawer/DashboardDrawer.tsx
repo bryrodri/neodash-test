@@ -1,68 +1,107 @@
-import { Drawer, ListItem, IconButton, Divider, ListItemIcon, ListItemText, List, Button } from "@material-ui/core";
-import React from "react";
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import OfflineBoltIcon from '@material-ui/icons/OfflineBolt';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
+import {
+  Drawer,
+  ListItem,
+  IconButton,
+  Divider,
+  ListItemIcon,
+  ListItemText,
+  List,
+  Button,
+} from "@material-ui/core";
+import React, {useState, useEffect} from "react";
+import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
+import OfflineBoltIcon from "@material-ui/icons/OfflineBolt";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
 import NeoSaveModal from "../../modal/SaveModal";
 import NeoLoadModal from "../../modal/LoadModal";
 import NeoShareModal from "../../modal/ShareModal";
 import { NeoAboutModal } from "../../modal/AboutModal";
 import { NeoReportExamplesModal } from "../../modal/ReportExamplesModal";
-import { applicationGetConnection, applicationHasAboutModalOpen, applicationIsStandalone } from '../../application/ApplicationSelectors';
-import { connect } from 'react-redux';
-import { setAboutModalOpen, setConnected, setWelcomeScreenOpen } from '../../application/ApplicationActions';
+import {
+  applicationGetConnection,
+  applicationHasAboutModalOpen,
+  applicationIsStandalone,
+} from "../../application/ApplicationSelectors";
+import { connect } from "react-redux";
+import {
+  setAboutModalOpen,
+  setConnected,
+  setWelcomeScreenOpen,
+} from "../../application/ApplicationActions";
 import NeoSettingsModal from "../../settings/SettingsModal";
 import { createNotificationThunk } from "../../page/PageThunks";
 import { getDashboardSettings } from "../DashboardSelectors";
 import { updateDashboardSetting } from "../../settings/SettingsActions";
-import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
-import CategoryIcon from '@material-ui/icons/Category';
+import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
+import CategoryIcon from "@material-ui/icons/Category";
 import { useAuth0 } from "@auth0/auth0-react";
 
-
 // The sidebar that appears on the left side of the dashboard.
-export const NeoDrawer = ({ open, hidden, connection, dashboardSettings, updateDashboardSetting,
-    handleDrawerClose, onAboutModalOpen, resetApplication }) => {
-    const { logout } = useAuth0();
-    
-    // Override to hide the drawer when the application is in standalone mode.
-    if (hidden) {
-        return <></>;
+export const NeoDrawer = ({
+  open,
+  hidden,
+  connection,
+  dashboardSettings,
+  updateDashboardSetting,
+  handleDrawerClose,
+  onAboutModalOpen,
+  resetApplication,
+}) => {
+  const { logout } = useAuth0();
+  const [sizeW, setSizeW]= useState(true)
+  // Override to hide the drawer when the application is in standalone mode.
+  if (hidden) {
+    return <></>;
+  }
+
+  let autoResize = () => {
+    if(window.innerWidth < 400 ){
+        setSizeW(false)
+    }else{
+        setSizeW(true)
     }
+}
 
-    const content = (
-        <Drawer
-            variant="permanent"
-            style={
-                (open) ? {
-                    position: 'relative',
-                    overflowX: 'hidden',
-                    width: '240px',
-                    transition: "width 125ms cubic-bezier(0.4, 0, 0.6, 1) 0ms",
-                    boxShadow: "2px 1px 10px 0px rgb(0 0 0 / 12%)",
+  useEffect(() => {
+    window.addEventListener('resize', autoResize)
+    autoResize();  
+  }, []);
 
-                } : {
-                    position: 'relative',
-                    overflowX: 'hidden',
-                    boxShadow: " 2px 1px 10px 0px rgb(0 0 0 / 12%)",
-
-                    transition: "width 125ms cubic-bezier(0.4, 0, 0.6, 1) 0ms",
-                    width: "56px"
-                }
+  const content = (
+    <Drawer
+      variant="permanent"
+      style={
+        open
+          ? {
+              position: "relative",
+              overflowX: "hidden",
+              width: "240px",
+              transition: "width 125ms cubic-bezier(0.4, 0, 0.6, 1) 0ms",
+              boxShadow: "2px 1px 10px 0px rgb(0 0 0 / 12%)",
             }
-            open={open == true}
-        >
-            <div style={{
-                display: 'flex',
-                alignItems: 'center',
-                overflowX: 'hidden',
-                justifyContent: 'flex-start',
-                padding: '0 8px',
-                minHeight: '64px',
+          : {
+              position: "relative",
+              overflowX: "hidden",
+              boxShadow: " 2px 1px 10px 0px rgb(0 0 0 / 12%)",
 
-            }}>
-                {/* <ListItem>
+              transition: "width 125ms cubic-bezier(0.4, 0, 0.6, 1) 0ms",
+              width: sizeW ? "56px" : "0",
+            }
+      }
+      open={open == true}
+    >
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          overflowX: "hidden",
+          justifyContent: "flex-start",
+          padding: "0 8px",
+          minHeight: "64px",
+        }}
+      >
+        {/* <ListItem>
                     <Button
                         component="label"
                         onClick={() => logout({ returnTo: window.location.origin })}
@@ -74,12 +113,11 @@ export const NeoDrawer = ({ open, hidden, connection, dashboardSettings, updateD
                     </Button>
                 </ListItem> */}
 
-
-                <IconButton onClick={handleDrawerClose}>
-                    <ChevronLeftIcon />
-                </IconButton>
-            </div>
-            {/* <Divider />
+        <IconButton onClick={handleDrawerClose}>
+          <ChevronLeftIcon />
+        </IconButton>
+      </div>
+      {/* <Divider />
             <div >
                 <ListItem style={{ background: "white", height: "47px" }} >
                     <ListItemIcon>
@@ -88,54 +126,55 @@ export const NeoDrawer = ({ open, hidden, connection, dashboardSettings, updateD
                 </ListItem>
             </div>
             <Divider /> */}
-            <List>
-                <div>
-                    {/* <NeoSettingsModal dashboardSettings={dashboardSettings} updateDashboardSetting={updateDashboardSetting}></NeoSettingsModal> */}
-                    {/* <NeoSaveModal></NeoSaveModal>
+      <List>
+        <div>
+          {/* <NeoSettingsModal dashboardSettings={dashboardSettings} updateDashboardSetting={updateDashboardSetting}></NeoSettingsModal> */}
+          {/* <NeoSaveModal></NeoSaveModal>
                     <NeoLoadModal></NeoLoadModal> */}
-                    {/* <NeoShareModal></NeoShareModal> */}
-                </div>
-            </List>
-            <Divider />
-            <List>
-                <ListItem button  onClick={() => logout({ returnTo: window.location.origin })}>
-                    <ListItemIcon>
-                        <ExitToAppIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Logout" />
-                </ListItem>
-                {/* <NeoReportExamplesModal database={connection.database}></NeoReportExamplesModal> */}
-                {/* <ListItem button onClick={onAboutModalOpen}>
+          {/* <NeoShareModal></NeoShareModal> */}
+        </div>
+      </List>
+      <Divider />
+      <List>
+        <ListItem
+          button
+          onClick={() => logout({ returnTo: window.location.origin })}
+        >
+          <ListItemIcon>
+            <ExitToAppIcon />
+          </ListItemIcon>
+          <ListItemText primary="Logout" />
+        </ListItem>
+        {/* <NeoReportExamplesModal database={connection.database}></NeoReportExamplesModal> */}
+        {/* <ListItem button onClick={onAboutModalOpen}>
                     <ListItemIcon>
                         <InfoOutlinedIcon />
                     </ListItemIcon>
                     <ListItemText primary="About" />
                 </ListItem> */}
-            </List>
-            <Divider />
-        </Drawer>
+      </List>
+      <Divider />
+    </Drawer>
+  );
+  return content;
+};
 
-    );
-    return content;
-}
-
-const mapStateToProps = state => ({
-    dashboardSettings: getDashboardSettings(state),
-    hidden: applicationIsStandalone(state),
-    aboutModalOpen: applicationHasAboutModalOpen(state),
-    connection: applicationGetConnection(state)
+const mapStateToProps = (state) => ({
+  dashboardSettings: getDashboardSettings(state),
+  hidden: applicationIsStandalone(state),
+  aboutModalOpen: applicationHasAboutModalOpen(state),
+  connection: applicationGetConnection(state),
 });
 
-const mapDispatchToProps = dispatch => ({
-    onAboutModalOpen: _ => dispatch(setAboutModalOpen(true)),
-    updateDashboardSetting: (setting, value) => {
-        dispatch(updateDashboardSetting(setting, value));
-    },
-    resetApplication: _ => {
-        // dispatch(setWelcomeScreenOpen(true));
-        dispatch(setConnected(false));
-    }
+const mapDispatchToProps = (dispatch) => ({
+  onAboutModalOpen: (_) => dispatch(setAboutModalOpen(true)),
+  updateDashboardSetting: (setting, value) => {
+    dispatch(updateDashboardSetting(setting, value));
+  },
+  resetApplication: (_) => {
+    // dispatch(setWelcomeScreenOpen(true));
+    dispatch(setConnected(false));
+  },
 });
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(NeoDrawer);
