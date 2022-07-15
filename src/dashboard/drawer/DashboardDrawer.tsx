@@ -8,7 +8,7 @@ import {
   List,
   Button,
 } from "@material-ui/core";
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import OfflineBoltIcon from "@material-ui/icons/OfflineBolt";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
@@ -17,12 +17,15 @@ import NeoSaveModal from "../../modal/SaveModal";
 import NeoLoadModal from "../../modal/LoadModal";
 import NeoShareModal from "../../modal/ShareModal";
 import { NeoAboutModal } from "../../modal/AboutModal";
+import BarChartIcon from "@material-ui/icons/BarChart";
+import Typography from "@material-ui/core/Typography";
 import { NeoReportExamplesModal } from "../../modal/ReportExamplesModal";
 import {
   applicationGetConnection,
   applicationHasAboutModalOpen,
   applicationIsStandalone,
 } from "../../application/ApplicationSelectors";
+import { setPageNumberThunk } from "../../settings/SettingsThunks";
 import { connect } from "react-redux";
 import {
   setAboutModalOpen,
@@ -31,11 +34,12 @@ import {
 } from "../../application/ApplicationActions";
 import NeoSettingsModal from "../../settings/SettingsModal";
 import { createNotificationThunk } from "../../page/PageThunks";
-import { getDashboardSettings } from "../DashboardSelectors";
+import { getDashboardSettings, getPages } from "../DashboardSelectors";
 import { updateDashboardSetting } from "../../settings/SettingsActions";
 import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
 import CategoryIcon from "@material-ui/icons/Category";
 import { useAuth0 } from "@auth0/auth0-react";
+import { getPageNumber } from "../../settings/SettingsSelectors";
 
 // The sidebar that appears on the left side of the dashboard.
 export const NeoDrawer = ({
@@ -47,25 +51,28 @@ export const NeoDrawer = ({
   handleDrawerClose,
   onAboutModalOpen,
   resetApplication,
+  pages,
+  selectPage,
+  pagenumber,
 }) => {
   const { logout } = useAuth0();
-  const [sizeW, setSizeW]= useState(true)
+  const [sizeW, setSizeW] = useState(true);
   // Override to hide the drawer when the application is in standalone mode.
   if (hidden) {
     return <></>;
   }
 
   let autoResize = () => {
-    if(window.innerWidth < 400 ){
-        setSizeW(false)
-    }else{
-        setSizeW(true)
+    if (window.innerWidth < 400) {
+      setSizeW(false);
+    } else {
+      setSizeW(true);
     }
-}
+  };
 
   useEffect(() => {
-    window.addEventListener('resize', autoResize)
-    autoResize();  
+    window.addEventListener("resize", autoResize);
+    autoResize();
   }, []);
 
   const content = (
@@ -76,7 +83,7 @@ export const NeoDrawer = ({
           ? {
               position: "relative",
               overflowX: "hidden",
-              width: "240px",
+              width: "320px",
               transition: "width 125ms cubic-bezier(0.4, 0, 0.6, 1) 0ms",
               boxShadow: "2px 1px 10px 0px rgb(0 0 0 / 12%)",
             }
@@ -117,15 +124,51 @@ export const NeoDrawer = ({
           <ChevronLeftIcon />
         </IconButton>
       </div>
-      {/* <Divider />
-            <div >
-                <ListItem style={{ background: "white", height: "47px" }} >
-                    <ListItemIcon>
-                    </ListItemIcon>
-                    <ListItemText primary="" />
-                </ListItem>
-            </div>
-            <Divider /> */}
+      <Divider />
+      <div>
+        {pages.map((p, i) => {
+          return (
+            <>
+              <ListItem
+                button
+                onClick={() => {
+                  selectPage(i);
+                }}
+                key={i}
+                style={{
+                  background: pagenumber == i ? "#bdbdbd" : "#ffffff",
+                  height: "47px",
+                }}
+              >
+                <ListItemIcon >
+                  <BarChartIcon style={{ color: pagenumber == i ? "#ffffff"  : "#000000"}}></BarChartIcon>
+                </ListItemIcon>
+                <ListItemText
+                  disableTypography
+                  primary={
+                    <Typography
+                      style={{ color: pagenumber == i ? "#FFFFFF" : "#000000" }}
+                    >
+                      {p.title}{" "}
+                    </Typography>
+                  }
+                />
+              </ListItem>
+            </>
+          );
+        })}
+      </div>
+      <Divider />
+      <ListItem
+        button
+        onClick={() => logout({ returnTo: window.location.origin })}
+      >
+        <ListItemIcon>
+          <ExitToAppIcon />
+        </ListItemIcon>
+        <ListItemText primary="Logout" />
+      </ListItem>
+      <Divider />
       <List>
         <div>
           {/* <NeoSettingsModal dashboardSettings={dashboardSettings} updateDashboardSetting={updateDashboardSetting}></NeoSettingsModal> */}
@@ -134,17 +177,7 @@ export const NeoDrawer = ({
           {/* <NeoShareModal></NeoShareModal> */}
         </div>
       </List>
-      <Divider />
       <List>
-        <ListItem
-          button
-          onClick={() => logout({ returnTo: window.location.origin })}
-        >
-          <ListItemIcon>
-            <ExitToAppIcon />
-          </ListItemIcon>
-          <ListItemText primary="Logout" />
-        </ListItem>
         {/* <NeoReportExamplesModal database={connection.database}></NeoReportExamplesModal> */}
         {/* <ListItem button onClick={onAboutModalOpen}>
                     <ListItemIcon>
@@ -153,7 +186,6 @@ export const NeoDrawer = ({
                     <ListItemText primary="About" />
                 </ListItem> */}
       </List>
-      <Divider />
     </Drawer>
   );
   return content;
@@ -164,9 +196,14 @@ const mapStateToProps = (state) => ({
   hidden: applicationIsStandalone(state),
   aboutModalOpen: applicationHasAboutModalOpen(state),
   connection: applicationGetConnection(state),
+  pages: getPages(state),
+  pagenumber: getPageNumber(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
+  selectPage: (number: any) => {
+    dispatch(setPageNumberThunk(number));
+  },
   onAboutModalOpen: (_) => dispatch(setAboutModalOpen(true)),
   updateDashboardSetting: (setting, value) => {
     dispatch(updateDashboardSetting(setting, value));

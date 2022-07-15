@@ -1,5 +1,5 @@
 import { Toolbar } from "@material-ui/core";
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import NeoPageButton from "./DashboardHeaderPageButton";
 import NeoPageAddButton from "./DashboardHeaderPageAddButton";
 import { connect } from "react-redux";
@@ -23,6 +23,7 @@ export const NeoDashboardHeaderPageList = ({ open, standalone, editable, pages, 
     const [isDragging, setIsDragging] = React.useState(false);
     const [canSwitchPages, setCanSwitchPages] = React.useState(true);
     const [lastElement, setLastElement] = React.useState(<></>);
+    const [sizeW, setSizeW]= useState(true)
 
     // We debounce several state changes to improve user experience.
     const debouncedSetCanSwitchPages = useCallback(
@@ -34,6 +35,19 @@ export const NeoDashboardHeaderPageList = ({ open, standalone, editable, pages, 
         debounce(setPageTitle, 250),
         [],
     );
+
+    let autoResize = () => {
+        if(window.innerWidth < 400 ){
+            setSizeW(false)
+        }else{
+            setSizeW(true)
+        }
+    }
+
+    useEffect(() => {
+        window.addEventListener('resize', autoResize)
+        autoResize();  
+      }, []);
 
     /**
      * Recompute the layout of the page buttons.This is called whenever the pages get reorganized.
@@ -62,7 +76,7 @@ export const NeoDashboardHeaderPageList = ({ open, standalone, editable, pages, 
     
     const content = (
         <Toolbar key={2} style={{ zIndex: 1001, minHeight: "50px", paddingLeft: "0px", paddingRight: "0px", background: "white" }}>
-            {!standalone ? <div style={{ width: open ? "0px" : "57px", zIndex: open ? 999 : 999, transition: "width 125ms cubic-bezier(0.4, 0, 0.6, 1) 0ms", height: "0px", background: "white" }}> </div> : <></>}
+            {!standalone && sizeW ? <div style={{ width: open ? "0px" : "57px", zIndex: open ? 999 : 999, transition: "width 125ms cubic-bezier(0.4, 0, 0.6, 1) 0ms", height: "0px", background: "white" }}> </div> : <></>}
             <ReactGridLayout
                 className="layout"
                 layout={layout}
@@ -101,7 +115,7 @@ export const NeoDashboardHeaderPageList = ({ open, standalone, editable, pages, 
                 rowHeight={47}
                 isBounded={true}
                 compactType={"horizontal"} >
-                {pages.map((page, i) =>
+                {/* {pages.map((page, i) =>
                     <div key={i}
                         style={{
                             cursor:'pointer',
@@ -119,7 +133,7 @@ export const NeoDashboardHeaderPageList = ({ open, standalone, editable, pages, 
                             onTitleUpdate={(e) => debouncedSetPageTitle(i, e.target.value)}
                         />
                     </div>
-                )}
+                )} */}
                 {editable && !isDragging ? lastElement : <></>}
             </ReactGridLayout>
         </Toolbar>

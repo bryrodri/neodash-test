@@ -40,7 +40,7 @@ export const NeoDashboardPlaceholder = ({connected}) => {
                     />
 
                 </Toolbar>
-                <Toolbar style={{ zIndex: 10, minHeight: "50px", paddingLeft: "0px", paddingRight: "0px", background: "white" }}>
+                {/* <Toolbar style={{ zIndex: 10, minHeight: "50px", paddingLeft: "0px", paddingRight: "0px", background: "white" }}>
                     <div style={{
                         width: '100%', zIndex: -112, height: "48px", overflowX: "hidden", overflowY: "auto", background: "rgba(240,240,240)",
                         boxShadow: "2px 1px 10px 0px rgb(0 0 0 / 12%)",
@@ -48,7 +48,7 @@ export const NeoDashboardPlaceholder = ({connected}) => {
                     }}>
 
                     </div>
-                </Toolbar>
+                </Toolbar> */}
             </AppBar>
             <div style={{
                 position: "absolute",

@@ -12,7 +12,7 @@ import { getDashboardIsEditable, getPageNumber } from "../../settings/SettingsSe
 import NeoDashboardHeaderPageList from "./DashboardHeaderPageList";
 import { NeoDashboardHeaderTitleBar } from "./DashboardHeaderTitleBar";
 
-const drawerWidth = 240;
+const drawerWidth = 320;
 
 
 
@@ -48,7 +48,7 @@ export const NeoDashboardHeader = ({ open, standalone, dashboardTitle,
             <NeoDashboardHeaderTitleBar downloadImageEnabled={downloadImageEnabled} onDownloadImage={onDownloadImage}
             dashboardTitle={dashboardTitle} setDashboardTitle={setDashboardTitle} editable={editable} standalone={standalone} open={open}
                 onConnectionModalOpen={onConnectionModalOpen} handleDrawerOpen={handleDrawerOpen} connection={connection}></NeoDashboardHeaderTitleBar>
-            <NeoDashboardHeaderPageList open={open}></NeoDashboardHeaderPageList>
+            {/* <NeoDashboardHeaderPageList open={open}></NeoDashboardHeaderPageList> */}
         </AppBar>
     );
     return content;
