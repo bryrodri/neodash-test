@@ -91,6 +91,12 @@ const NeoParameterSelectionChart = (props: ChartProps) => {
                 getOptionSelected={(option, value) => (option && option.toString()) === (value && value.toString())}
                 value={value ? value.toString() : "" + currentValue}
                 onChange={(event, newValue) => {
+                    if(label==='n1'){
+                        localStorage.setItem('n1', JSON.stringify(newValue));
+                    }
+                    if(label==='n2'){
+                        localStorage.setItem('n2', JSON.stringify(newValue));
+                    }
                     setValue(newValue);
                     setInputText("" + newValue);
 
