@@ -91,6 +91,7 @@ export const texto = {
             type: "Node Property",
             entityType: "n2",
             propertyType: "nombre",
+            helperText: "Subcategoría",
             parameterName: "neodash_n2_nombre",
             suggestionsUpdateTimeout: 50,
           },
@@ -108,6 +109,7 @@ export const texto = {
           settings: {
             type: "Node Property",
             entityType: "n3",
+            helperText: "Subcategoría",
             propertyType: "nombre",
             parameterName: "neodash_n3_nombre",
             suggestionsUpdateTimeout: 50,
@@ -234,6 +236,7 @@ export const texto = {
           settings: {
             type: "Node Property",
             entityType: "n3",
+            helperText: "Categoría",
             propertyType: "nombre",
             parameterName: "neodash_n3_nombre",
             suggestionsUpdateTimeout: 50,
@@ -288,6 +291,7 @@ export const texto = {
           selection: {},
           settings: {
             type: "Node Property",
+            helperText: "Subcategoría",
             entityType: "n2",
             propertyType: "nombre",
             parameterName: "neodash_n2_nombre",

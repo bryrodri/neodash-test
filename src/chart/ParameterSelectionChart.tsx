@@ -131,7 +131,7 @@ const NeoParameterSelectionChart = (props: ChartProps) => {
                 }}
                 renderInput={(params) => <TextField {...params} InputLabelProps={{ shrink: true }} 
                 placeholder="Start typing..." 
-                label={helperText ? helperText : (label==='n1' ? 'Categoria' : label==='n2'|| label==='n3' ? 'SubCategoria' : label) + " " + property} variant="outlined" />}
+                label={helperText ? helperText :label + " " + property} variant="outlined" />}
             />
         }
     </div>
