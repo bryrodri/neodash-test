@@ -4,6 +4,7 @@ import { ChartProps } from './Chart';
 import { CircularProgress, debounce, TextareaAutosize, TextField } from '@material-ui/core';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import NeoField from '../component/field/Field';
+import storage from 'redux-persist/lib/storage';
 
 /**
  * Renders Neo4j records as their JSON representation.
@@ -31,6 +32,24 @@ const NeoParameterSelectionChart = (props: ChartProps) => {
         [],
     );
 
+    useEffect(() => {
+        if(label==='n3'){
+            storage.removeItem('n3')
+
+            setInputText("");
+            debouncedQueryCallback && debouncedQueryCallback(query, { input: inputText }, setExtraRecords)
+        }
+
+    }, [localStorage.getItem('n2')]);
+
+    useEffect(() => {
+        if(label==='n2' || label==='n3'){
+            storage.removeItem('n2')
+            storage.removeItem('n3')
+            setInputText("");
+            debouncedQueryCallback && debouncedQueryCallback(query, { input: inputText }, setExtraRecords)
+        }
+    }, [localStorage.getItem('n1')]);
    
     const currentValue = (props.getGlobalParameter && props.getGlobalParameter(parameter)) ? props.getGlobalParameter(parameter) : "";
     const [extraRecords, setExtraRecords] = React.useState([]);
@@ -80,14 +99,15 @@ const NeoParameterSelectionChart = (props: ChartProps) => {
             :
             <Autocomplete
                 id="autocomplete"
+                className='autocomplete'
                 options={extraRecords.map(r => r["_fields"] && r["_fields"][0] !== null ? r["_fields"][0] : "(no data)").sort()}
                 getOptionLabel={(option) => option ? option.toString() : ""}
                 style={{ maxWidth: "calc(100% - 30px)",  marginLeft: "15px", marginTop: "5px" }}
                 inputValue={inputText}
                 onInputChange={(event, value) => {
-                    setInputText("" + value);
                     debouncedQueryCallback(query, { input: ""+value }, setExtraRecords);
                 }}
+                onSelect={()=>{ debouncedQueryCallback && debouncedQueryCallback(query, { input: inputText }, setExtraRecords)}}
                 getOptionSelected={(option, value) => (option && option.toString()) === (value && value.toString())}
                 value={value ? value.toString() : "" + currentValue}
                 onChange={(event, newValue) => {
@@ -111,7 +131,7 @@ const NeoParameterSelectionChart = (props: ChartProps) => {
                 }}
                 renderInput={(params) => <TextField {...params} InputLabelProps={{ shrink: true }} 
                 placeholder="Start typing..." 
-                label={helperText ? helperText : label + " " + property} variant="outlined" />}
+                label={helperText ? helperText : (label==='n1' ? 'Categoria' : label==='n2'|| label==='n3' ? 'SubCategoria' : label) + " " + property} variant="outlined" />}
             />
         }
     </div>

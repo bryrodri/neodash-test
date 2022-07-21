@@ -63,7 +63,6 @@ const NeoCardView = ({ title, database, query, globalParameters,
         if(!globalParameters){
             return {};
         }
-        console.log('parametros get', Object.fromEntries(Object.entries(globalParameters).filter(([local]) => localQueryVariables.includes(local) )))
 
         return Object.fromEntries(Object.entries(globalParameters).filter(([local]) => localQueryVariables.includes(local) ));
     }

@@ -11,6 +11,7 @@ import {
 import React, { useState, useEffect } from "react";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import OfflineBoltIcon from "@material-ui/icons/OfflineBolt";
+import StoreIcon from '@material-ui/icons/Store'; 
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
 import NeoSaveModal from "../../modal/SaveModal";
@@ -40,6 +41,9 @@ import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
 import CategoryIcon from "@material-ui/icons/Category";
 import { useAuth0 } from "@auth0/auth0-react";
 import { getPageNumber } from "../../settings/SettingsSelectors";
+import LocationOnIcon from '@material-ui/icons/LocationOn';
+import DashboardIcon from '@material-ui/icons/Dashboard';
+
 
 // The sidebar that appears on the left side of the dashboard.
 export const NeoDrawer = ({
@@ -55,6 +59,7 @@ export const NeoDrawer = ({
   selectPage,
   pagenumber,
 }) => {
+  const iconArray=[  <BarChartIcon></BarChartIcon>, <DashboardIcon></DashboardIcon>,<StoreIcon ></StoreIcon>, <LocationOnIcon></LocationOnIcon> ]
   const { logout } = useAuth0();
   const [sizeW, setSizeW] = useState(true);
   // Override to hide the drawer when the application is in standalone mode.
@@ -141,7 +146,7 @@ export const NeoDrawer = ({
                 }}
               >
                 <ListItemIcon >
-                  <BarChartIcon style={{ color: pagenumber == i ? "#ffffff"  : "#000000"}}></BarChartIcon>
+                  {iconArray[i]}
                 </ListItemIcon>
                 <ListItemText
                   disableTypography

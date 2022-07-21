@@ -16,8 +16,6 @@ import {
 
 const update = (state, mutations) =>
     Object.assign({}, state, mutations)
-console.log("aqui",process.env.REACT_APP_PROTOCOL )
-console.log("aqui",process.env.PROTOCOL )
 const initialState =
 {
     notificationTitle: null,

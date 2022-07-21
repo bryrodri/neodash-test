@@ -21,7 +21,7 @@ export const texto = {
         {
           title: "Categoría",
           query:
-            "MATCH (n:`n1`) \nWHERE toLower(toString(n.`nombre`)) CONTAINS toLower($input) \nRETURN DISTINCT n.`nombre` as value LIMIT 5",
+            "MATCH (n:`n1`) \nWHERE toLower(toString(n.`nombre`)) CONTAINS toLower($input) \nRETURN DISTINCT n.`nombre` as value LIMIT 30",
           width: 4,
           height: 1,
           x: 0,
@@ -78,9 +78,9 @@ export const texto = {
           },
         },
         {
-          title: "",
+          title: "Subcategoría",
           query:
-            "MATCH (n:`n2`)-[:ES_SUBCATEGORIA]->(n1:`n1`) \nWHERE toLower(toString(n.`nombre`)) CONTAINS toLower($input) AND toLower(toString(n1.`nombre`))= toLower($neodash_n1_nombre)  \nRETURN DISTINCT n.`nombre` as value LIMIT 5",
+            "MATCH (n:`n2`)-[:ES_SUBCATEGORIA]->(n1:`n1`) \nWHERE toLower(toString(n.`nombre`)) CONTAINS toLower($input) AND toLower(toString(n1.`nombre`))= toLower($neodash_n1_nombre)  \nRETURN DISTINCT n.`nombre` as value LIMIT 30",
           width: 4,
           height: 1,
           x: 4,
@@ -92,13 +92,13 @@ export const texto = {
             entityType: "n2",
             propertyType: "nombre",
             parameterName: "neodash_n2_nombre",
-            suggestionsUpdateTimeout: 100,
+            suggestionsUpdateTimeout: 50,
           },
         },
         {
-          title: "",
+          title: "Subcategoría",
           query:
-            "MATCH (n:`n3`)-[:ES_SUBCATEGORIA]->(n2:`n2`) \nWHERE toLower(toString(n.`nombre`)) CONTAINS toLower($input) AND toLower(toString(n2.`nombre`))= toLower($neodash_n2_nombre)  \nRETURN DISTINCT n.`nombre` as value LIMIT 5",
+            "MATCH (n:`n3`)-[:ES_SUBCATEGORIA]->(n2:`n2`) \nWHERE toLower(toString(n.`nombre`)) CONTAINS toLower($input) AND toLower(toString(n2.`nombre`))= toLower($neodash_n2_nombre)  \nRETURN DISTINCT n.`nombre` as value LIMIT 30",
           width: 4,
           height: 1,
           x: 8,
@@ -110,7 +110,7 @@ export const texto = {
             entityType: "n3",
             propertyType: "nombre",
             parameterName: "neodash_n3_nombre",
-            suggestionsUpdateTimeout: 100,
+            suggestionsUpdateTimeout: 50,
           },
         },
       ],
@@ -224,7 +224,7 @@ export const texto = {
         {
           title: "Categoria",
           query:
-            "MATCH (n:`n3`)-[:ES_SUBCATEGORIA]->(n2:`n2`) \nWHERE toLower(toString(n.`nombre`)) CONTAINS toLower($input) AND toLower(toString(n2.`nombre`))= toLower($neodash_n2_nombre)  \nRETURN DISTINCT n.`nombre` as value LIMIT 5",
+            "MATCH (n:`n3`)-[:ES_SUBCATEGORIA]->(n2:`n2`) \nWHERE toLower(toString(n.`nombre`)) CONTAINS toLower($input) AND toLower(toString(n2.`nombre`))= toLower($neodash_n2_nombre)  \nRETURN DISTINCT n.`nombre` as value LIMIT 30",
           width: 3,
           height: 1,
           x: 0,
@@ -236,7 +236,7 @@ export const texto = {
             entityType: "n3",
             propertyType: "nombre",
             parameterName: "neodash_n3_nombre",
-            suggestionsUpdateTimeout: 100,
+            suggestionsUpdateTimeout: 50,
           },
         },
         {
@@ -277,9 +277,9 @@ export const texto = {
           },
         },
         {
-          title: "",
+          title: "Subcategoría",
           query:
-            "MATCH (n:`n2`)-[:ES_SUBCATEGORIA]->(n1:`n1`) \nWHERE toLower(toString(n.`nombre`)) CONTAINS toLower($input) AND toLower(toString(n1.`nombre`))= toLower($neodash_n1_nombre)  \nRETURN DISTINCT n.`nombre` as value LIMIT 5",
+            "MATCH (n:`n2`)-[:ES_SUBCATEGORIA]->(n1:`n1`) \nWHERE toLower(toString(n.`nombre`)) CONTAINS toLower($input) AND toLower(toString(n1.`nombre`))= toLower($neodash_n1_nombre)  \nRETURN DISTINCT n.`nombre` as value LIMIT 30",
           width: 3,
           height: 1,
           x: 0,
@@ -291,13 +291,13 @@ export const texto = {
             entityType: "n2",
             propertyType: "nombre",
             parameterName: "neodash_n2_nombre",
-            suggestionsUpdateTimeout: 100,
+            suggestionsUpdateTimeout: 50,
           },
         },
         {
-          title: "",
+          title: "Subcategoría",
           query:
-            "MATCH (n:`n1`) \nWHERE toLower(toString(n.`nombre`)) CONTAINS toLower($input) \nRETURN DISTINCT n.`nombre` as value LIMIT 5",
+            "MATCH (n:`n1`) \nWHERE toLower(toString(n.`nombre`)) CONTAINS toLower($input) \nRETURN DISTINCT n.`nombre` as value LIMIT 30",
           width: 3,
           height: 1,
           x: 0,
@@ -372,54 +372,6 @@ export const texto = {
             layout: "vertical",
             marginLeft: 60,
             marginBottom: 80,
-          },
-        },
-      ],
-    },
-    {
-      title: "",
-      reports: [
-        {
-          title: "",
-          query:
-            "MATCH (n:`n1`) \nWHERE toLower(toString(n.`nombre`)) CONTAINS toLower($input) \nRETURN DISTINCT n.`nombre` as value LIMIT 5",
-          width: 3,
-          height: 1,
-          x: 0,
-          y: 0,
-          type: "select",
-          selection: {},
-          settings: {
-            type: "Node Property",
-            entityType: "n1",
-            propertyType: "nombre",
-            parameterName: "neodash_n1_nombre",
-            clearParameterOnFieldClear: true,
-            manualPropertyNameSpecification: true,
-            suggestionsUpdateTimeout: 100,
-            setParameterTimeout: 100,
-          },
-        },
-        {
-          title: "Reporto",
-          query:
-            "MATCH (n:`n2`)-[:ES_SUBCATEGORIA]->(n1:`n1`) \nWHERE toLower(toString(n.`nombre`)) CONTAINS toLower($input) AND toLower(toString(n1.`nombre`))= toLower($neodash_n1_nombre)  \nRETURN DISTINCT n.`nombre` as value LIMIT 5",
-          width: 3,
-          height: 1,
-          x: 0,
-          y: 1,
-          type: "select",
-          selection: {},
-          settings: {
-            type: "Node Property",
-            entityType: "n2",
-            propertyType: "nombre",
-            parameterName: "neodash_n2_nombre",
-            clearParameterOnFieldClear: true,
-            manualPropertyNameSpecification: true,
-            helperText: "Subcategoria",
-            suggestionsUpdateTimeout: 100,
-            setParameterTimeout: 100,
           },
         },
       ],

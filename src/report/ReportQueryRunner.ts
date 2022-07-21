@@ -72,13 +72,10 @@ export async function runCypherQuery(driver,
             query = "CALL { " + query + "} RETURN * LIMIT " + (rowLimit + 1)
         }
     }
-    console.log('query',query)
-    console.log('parametros', parameters)
     transaction.run(query, parameters)
         .then(res => {
             // @ts-ignore
             var { records, summary } = res;
-            console.log('res',query, res)
             // TODO - check query summary to ensure that no writes are made in safe-mode.
             if (records.length == 0) {
                 setStatus(QueryStatus.NO_DATA)
@@ -125,7 +122,7 @@ export async function runCypherQuery(driver,
         })
         .catch(e => {
             // setFields([]);
-            console.log('error', e)
+            console.log('error', e.message)
             // Process timeout errors.
             if (e.message.startsWith("The transaction has been terminated. " +
                 "Retry your operation in a new transaction, and you should see a successful result. " +
@@ -134,6 +131,13 @@ export async function runCypherQuery(driver,
                 transaction.rollback();
                 setStatus(QueryStatus.TIMED_OUT);
                 return e.message
+            }
+
+            if(e.message.startsWith("Expected parameter")){
+                setRecords([{ "error": 'Complete los filtros para ver los reportes' }]);
+                transaction.rollback();
+                setStatus(QueryStatus.ERROR);
+                return 'Complete los filtros para ver los reportes'
             }
 
             // Process other errors.

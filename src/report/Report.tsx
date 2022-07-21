@@ -42,8 +42,6 @@ export const NeoReport = ({
   expanded = false, // whether the report is visualized in a fullscreen view.
   ChartType = NeoTableChart, // The report component to render with the query results.
 }) => {
-  console.log("confirmacion", parameters);
-  console.log("type", type);
   const [records, setRecords] = useState(null);
   const [timer, setTimer] = useState(null);
   const [status, setStatus] = useState(QueryStatus.NO_QUERY);
@@ -114,7 +112,6 @@ export const NeoReport = ({
         }
       });
     }
-    console.log("parametros report", parameters);
 
     const defaultKeyField = REPORT_TYPES[type].selection
       ? Object.keys(REPORT_TYPES[type].selection).find(
@@ -208,16 +205,13 @@ export const NeoReport = ({
 
   // Define query callback to allow reports to get extra data on interactions.
   const queryCallback = useCallback((query, parameters, setRecords) => {
-    console.log('type',settings?.entityType )
     if (settings?.entityType === "n2") {
       
       parameters.neodash_n1_nombre= localStorage.getItem('n1')?.replaceAll('"','')
-      console.log('test', parameters)
     }
     if (settings?.entityType === "n3") {
       
         parameters.neodash_n2_nombre= localStorage.getItem('n2')?.replaceAll('"','')
-        console.log('test', parameters)
       }
     runCypherQuery(
       driver,
@@ -273,16 +267,12 @@ export const NeoReport = ({
       </Typography>
     );
   } else if (status == QueryStatus.NO_DATA) {
-    return <NeoCodeViewerComponent value={"Query returned no data."} />;
+    return <NeoCodeViewerComponent value={"No hay datos para mostrar este grafico."} />;
   } else if (status == QueryStatus.NO_DRAWABLE_DATA) {
     return (
       <NeoCodeViewerComponent
         value={
-          "Data was returned, but it can't be visualized.\n\n" +
-          "This could have the following causes:\n" +
-          "- a numeric value field was selected, but no numeric values were returned. \n" +
-          "- a numeric value field was selected, but only zero's were returned.\n" +
-          "- Your visualization expects nodes/relationships, but none were returned."
+          "Debido a la poca cantidad de datos no es posible representarla en este grafico.\n\n"
         }
       />
     );

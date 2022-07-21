@@ -230,7 +230,6 @@ export const loadApplicationConfigThunk = () => async (dispatch: any, getState: 
         
         config = await (await fetch("config.json")).json();
     } catch (e) {
-        console.log("aquiii1")
         // Config may not be found, for example when we are in Neo4j Desktop.
         console.log("No config file detected. Setting to safe defaults.");
     }
