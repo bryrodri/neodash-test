@@ -33,6 +33,7 @@ export const texto = {
             entityType: "n1",
             propertyType: "nombre",
             parameterName: "neodash_n1_nombre",
+            helperText: "Categoría",
           },
         },
         {
@@ -224,7 +225,7 @@ export const texto = {
           },
         },
         {
-          title: "Categoria",
+          title: "Subcategoria",
           query:
             "MATCH (n:`n3`)-[:ES_SUBCATEGORIA]->(n2:`n2`) \nWHERE toLower(toString(n.`nombre`)) CONTAINS toLower($input) AND toLower(toString(n2.`nombre`))= toLower($neodash_n2_nombre)  \nRETURN DISTINCT n.`nombre` as value LIMIT 30",
           width: 3,
@@ -236,7 +237,7 @@ export const texto = {
           settings: {
             type: "Node Property",
             entityType: "n3",
-            helperText: "Categoría",
+            helperText: "Subcategoría",
             propertyType: "nombre",
             parameterName: "neodash_n3_nombre",
             suggestionsUpdateTimeout: 50,
@@ -299,7 +300,7 @@ export const texto = {
           },
         },
         {
-          title: "Subcategoría",
+          title: "Categoría",
           query:
             "MATCH (n:`n1`) \nWHERE toLower(toString(n.`nombre`)) CONTAINS toLower($input) \nRETURN DISTINCT n.`nombre` as value LIMIT 30",
           width: 3,
@@ -313,6 +314,7 @@ export const texto = {
             entityType: "n1",
             propertyType: "nombre",
             parameterName: "neodash_n1_nombre",
+            helperText: "Categoría",
           },
         },
       ],
