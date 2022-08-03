@@ -19,6 +19,7 @@ import NeoLoadModal from "../../modal/LoadModal";
 import NeoShareModal from "../../modal/ShareModal";
 import { NeoAboutModal } from "../../modal/AboutModal";
 import BarChartIcon from "@material-ui/icons/BarChart";
+import AccountTreeIcon from "@material-ui/icons/AccountTree";
 import Typography from "@material-ui/core/Typography";
 import { NeoReportExamplesModal } from "../../modal/ReportExamplesModal";
 import {
@@ -59,7 +60,7 @@ export const NeoDrawer = ({
   selectPage,
   pagenumber,
 }) => {
-  const iconArray=[  <BarChartIcon></BarChartIcon>, <DashboardIcon></DashboardIcon>,<StoreIcon ></StoreIcon>, <LocationOnIcon></LocationOnIcon> ]
+  const iconArray=[  <BarChartIcon></BarChartIcon>, <DashboardIcon></DashboardIcon>,<StoreIcon ></StoreIcon>, <LocationOnIcon></LocationOnIcon> , <AccountTreeIcon></AccountTreeIcon> ]
   const { logout } = useAuth0();
   const [sizeW, setSizeW] = useState(true);
   // Override to hide the drawer when the application is in standalone mode.

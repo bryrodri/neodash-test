@@ -382,6 +382,87 @@ export const texto = {
         },
       ],
     },
+    {
+      "title": "Grafos",
+      "reports": [
+        {
+          "title": "SubCategoría con productos y control diario",
+          "query": "MATCH x=(cd:control_diario)-[:GESTIONA]->(p:producto)<-[:CLASIFICA]-(c:n3)\nRETURN x limit 100\n\n\n\n",
+          "width": 12,
+          "height": 3,
+          "x": 0,
+          "y": 0,
+          "type": "graph",
+          "selection": {
+            "control_diario": "(label)",
+            "producto": "(label)",
+            "categoria": "(label)",
+            "n3": "(label)"
+          },
+          "settings": {
+            "nodePositions": {},
+            "showPropertiesOnClick": true,
+            "hideSelections": true
+          }
+        },
+        {
+          "title": "Punto de venta con productos y control diario",
+          "query": "\n\nMATCH x=(pv:punto_venta)-[:TIENE]->(cd:control_diario)-[:GESTIONA]->(p:producto)<-[:CLASIFICA]-(c:n3)\nRETURN x limit 100\n\n\n",
+          "width": 12,
+          "height": 3,
+          "x": 0,
+          "y": 6,
+          "type": "graph",
+          "selection": {
+            "punto_venta": "(label)",
+            "control_diario": "(label)",
+            "producto": "(label)",
+            "categoria": "(label)",
+            "n3": "(label)"
+          },
+          "settings": {
+            "nodePositions": {},
+            "hideSelections": true
+          }
+        },
+        {
+          "title": "Marcas con productos y control diario",
+          "query": "\nMATCH x=(cd:control_diario)-[:GESTIONA]->(p:producto)-[:PERTENECE]->(m:marca)\nRETURN x limit 100\n\n\n",
+          "width": 12,
+          "height": 3,
+          "x": 0,
+          "y": 3,
+          "type": "graph",
+          "selection": {
+            "control_diario": "(label)",
+            "producto": "(label)",
+            "marca": "(label)"
+          },
+          "settings": {
+            "nodePositions": {},
+            "hideSelections": true
+          }
+        },
+        {
+          "title": "Control diario por punto de venta",
+          "query": "MATCH x=(c:control_diario)-[p:TIENE]-(pv:punto_venta)-[u:ESTA_UBICADO]-(m:municipio)\n\nRETURN x limit 100\n\n\n",
+          "width": 12,
+          "height": 3,
+          "x": 0,
+          "y": 9,
+          "type": "graph",
+          "selection": {
+            "control_diario": "(label)",
+            "punto_venta": "(label)",
+            "municipio": "(label)"
+          },
+          "settings": {
+            "nodePositions": {},
+            "hideSelections": true
+          }
+        }
+      ]
+    }
   ],
   parameters: {},
 };
