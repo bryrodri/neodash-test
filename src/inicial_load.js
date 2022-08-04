@@ -387,17 +387,17 @@ export const texto = {
       "reports": [
         {
           "title": "SubCategoría con productos y control diario",
-          "query": "MATCH x=(cd:control_diario)-[:GESTIONA]->(p:producto)<-[:CLASIFICA]-(c:n3)\nRETURN x limit 100\n\n\n\n",
+          "query": "MATCH x=(cd:control_diario)-[:GESTIONA]->(p:producto)<-[:CLASIFICA]-(c:n3) where cd.costo_producto<>'0' and cd.precio_unitario_producto<>'0' \nRETURN x limit 100\n\n\n\n",
           "width": 12,
           "height": 3,
           "x": 0,
           "y": 0,
           "type": "graph",
           "selection": {
-            "control_diario": "(label)",
-            "producto": "(label)",
-            "categoria": "(label)",
-            "n3": "(label)"
+            "control_diario": "fecha_movimiento",
+            "producto": "descripcion",
+            "categoria": "nombre",
+            "n3": "nombre"
           },
           "settings": {
             "nodePositions": {},
@@ -407,18 +407,18 @@ export const texto = {
         },
         {
           "title": "Punto de venta con productos y control diario",
-          "query": "\n\nMATCH x=(pv:punto_venta)-[:TIENE]->(cd:control_diario)-[:GESTIONA]->(p:producto)<-[:CLASIFICA]-(c:n3)\nRETURN x limit 100\n\n\n",
+          "query": "\n\nMATCH x=(pv:punto_venta)-[:TIENE]->(cd:control_diario)-[:GESTIONA]->(p:producto)<-[:CLASIFICA]-(c:n3) where cd.costo_producto<>'0' and cd.precio_unitario_producto<>'0'  \nRETURN x limit 100\n\n\n",
           "width": 12,
           "height": 3,
           "x": 0,
           "y": 6,
           "type": "graph",
           "selection": {
-            "punto_venta": "(label)",
-            "control_diario": "(label)",
-            "producto": "(label)",
-            "categoria": "(label)",
-            "n3": "(label)"
+            "punto_venta": "nombre",
+            "control_diario": "fecha_movimiento",
+            "producto": "descripcion",
+            "categoria": "nombre",
+            "n3": "nombre"
           },
           "settings": {
             "nodePositions": {},
@@ -427,16 +427,16 @@ export const texto = {
         },
         {
           "title": "Marcas con productos y control diario",
-          "query": "\nMATCH x=(cd:control_diario)-[:GESTIONA]->(p:producto)-[:PERTENECE]->(m:marca)\nRETURN x limit 100\n\n\n",
+          "query": "\nMATCH x=(cd:control_diario)-[:GESTIONA]->(p:producto)-[:PERTENECE]->(m:marca) where cd.costo_producto<>'0' and cd.precio_unitario_producto<>'0' \nRETURN x limit 100\n\n\n",
           "width": 12,
           "height": 3,
           "x": 0,
           "y": 3,
           "type": "graph",
           "selection": {
-            "control_diario": "(label)",
-            "producto": "(label)",
-            "marca": "(label)"
+            "control_diario": "fecha_movimiento",
+            "producto": "descripcion",
+            "marca": "nombre"
           },
           "settings": {
             "nodePositions": {},
@@ -445,16 +445,16 @@ export const texto = {
         },
         {
           "title": "Control diario por punto de venta",
-          "query": "MATCH x=(c:control_diario)-[p:TIENE]-(pv:punto_venta)-[u:ESTA_UBICADO]-(m:municipio)\n\nRETURN x limit 100\n\n\n",
+          "query": "MATCH x=(c:control_diario)-[p:TIENE]-(pv:punto_venta)-[u:ESTA_UBICADO]-(m:municipio) where c.costo_producto<>'0' and c.precio_unitario_producto<>'0'  \n\nRETURN x limit 100\n\n\n",
           "width": 12,
           "height": 3,
           "x": 0,
           "y": 9,
           "type": "graph",
           "selection": {
-            "control_diario": "(label)",
-            "punto_venta": "(label)",
-            "municipio": "(label)"
+            "control_diario": "fecha_movimiento",
+            "punto_venta": "nombre",
+            "municipio": "nombre"
           },
           "settings": {
             "nodePositions": {},
